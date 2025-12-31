@@ -169,6 +169,7 @@ rqt_graph
 
 ## Credits
 - **Course & Instructor:** Edouard Bernard — *ROS2 for Beginners* (Udemy)
+LinkedIn: https://www.linkedin.com/in/edouard-renard-66449aa5/
 
 ---
 
