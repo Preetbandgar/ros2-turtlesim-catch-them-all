@@ -12,8 +12,10 @@ from my_robot_interfaces.srv import CatchTurtle
 class TurtleControllerNode(Node):
     def __init__(self):
         super().__init__("turtle_controller")
+        self.declare_parameter("catch_closest_turtle", True)
+        self.catch_closest_turtle_ = self.get_parameter(
+            "catch_closest_turtle").value
         self.turtle_to_catch_: Turtle = None
-        self.catch_closest_turtle_ = True
         self.pose_ : Pose = None
         self.cmd_vel_publisher = self.create_publisher(
             Twist, "turtle1/cmd_vel", 10)
