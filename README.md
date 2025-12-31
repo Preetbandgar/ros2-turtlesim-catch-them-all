@@ -55,28 +55,41 @@ This logic is intentionally simple and **not intended to represent production-gr
 ---
 
 ## Repository Structure
-```text
+```
 ros2-turtlesim-catch-them-all/
 ├── README.md
-├── .gitignore
-├── screenshots/
-├── videos/
+├── screenshots/                     # Screenshots used in this README
+├── videos/                          # Short demo recordings
 └── src/
-    ├── turtlesim_catch_them_all/
-    │   ├── package.xml
-    │   ├── setup.py
-    │   ├── setup.cfg
-    │   ├── resource/
-    │   └── turtlesim_catch_them_all/
-    │       ├── turtle_controller.py
-    │       └── turtle_spawner.py
-    └── my_robot_interfaces/
+    ├── my_robot_bringup/             # Launch and configuration package
+    │   ├── launch/
+    │   │   └── turtlesim_catch_them_all.launch.xml
+    │   ├── config/
+    │   │   └── catch_them_all_config.yaml
+    │   ├── CMakeLists.txt
+    │   └── package.xml
+    │
+    ├── my_robot_interfaces/          # Custom interfaces package
+    │   ├── msg/
+    │   │   ├── Turtle.msg
+    │   │   ├── TurtleArray.msg
+    │   │   └── HardwareStatus.msg
+    │   ├── srv/
+    │   │   └── CatchTurtle.srv
+    │   ├── CMakeLists.txt
+    │   └── package.xml
+    │
+    └── turtlesim_catch_them_all/     # Application logic package
         ├── package.xml
-        ├── CMakeLists.txt
-        └── msg/
-            ├── Turtle.msg
-            └── TurtleArray.msg
+        ├── setup.py
+        ├── setup.cfg
+        ├── resource/
+        └── turtlesim_catch_them_all/
+            ├── __init__.py
+            ├── turtle_controller.py
+            └── turtle_spawner.py
 ```
+
 
 ---
 
