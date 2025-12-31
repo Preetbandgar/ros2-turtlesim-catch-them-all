@@ -1,0 +1,20 @@
+<launch>
+  <node
+    pkg="my_py_pkg_1"
+    exec="number_publisher"
+    name="my_number_publisher"
+    namespace="/abc">
+       <remap from="number" to="my_number" />
+       <!-- <param name="number" value="5" />
+       <param name="timer_period" value="2.0" /> -->
+       <param from="$(find-pkg-share my_robot_bringup)/config/number_app.yaml" />
+  </node>     
+
+  <node
+    pkg="my_py_pkg_1"
+    exec="number_counter"
+    name="my_number_counter"
+    namespace="/abc">
+        <remap from="number" to="my_number" />
+  </node>
+</launch>
