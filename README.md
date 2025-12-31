@@ -172,6 +172,8 @@ rqt_graph
 
 LinkedIn: https://www.linkedin.com/in/edouard-renard-66449aa5/
 
+Course link: https://www.udemy.com/course/ros2-for-beginners/
+
 ---
 
 ## Author
