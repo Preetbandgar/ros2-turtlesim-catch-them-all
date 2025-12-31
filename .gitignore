@@ -3,10 +3,16 @@ build/
 install/
 log/
 
-# Python cache
+# Python
 __pycache__/
 *.pyc
+*.pyo
+*.egg-info/
 
-# OS junk
+# VS Code
+.vscode/
+*.db
+
+# OS
 .DS_Store
 Thumbs.db
