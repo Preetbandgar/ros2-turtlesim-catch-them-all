@@ -7,9 +7,13 @@
 ---
 
 ## 📌 Overview
-This project demonstrates a **multi-node ROS2 application** built on top of the Turtlesim simulator. A main turtle autonomously chases and catches dynamically spawned turtles using ROS2 publishers, subscribers, services, timers, and custom interfaces.
+This project demonstrates a **multi-node ROS2 application** built using the **Turtlesim** simulator.
+A primary turtle (`turtle1`) autonomously chases dynamically spawned turtles using **ROS2 nodes, topics, services, timers, and custom interfaces.**
+The project focuses on **ROS2 fundamentals and runtime introspection,** not advanced robotics algorithms.
 
-> ⚠️ **Transparency Note**: This project was built as a hands-on learning exercise by following a structured ROS2 course. While the system was successfully built, launched, and introspected, the primary goal was understanding ROS2 architecture and tooling rather than inventing new algorithms.
+> ⚠️ **Transparency Note**:
+  This project was completed by following a structured ROS2 course and reproducing the implementation step-by-step.
+  The objective was to **understand ROS2 architecture, execution flow, and debugging tools**  through hands-on practice.
 
 ---
 
@@ -17,18 +21,13 @@ This project demonstrates a **multi-node ROS2 application** built on top of the 
 
 ### Nodes
 - **`/turtlesim`** (ROS2 provided)
-  - Simulation environment
-  - Provides `/spawn` and `/kill` services
-  - Publishes turtle pose and sensor topics
+     ROS2-provided simulation node. Publishes turtle pose and exposes `/spawn` and `/kill` services.
 
 - **`/turtle_spawner`**
-  - Periodically spawns new turtles
-  - Publishes the list of active turtles on `/alive_turtles`
+     Spawns turtles periodically and publishes the list of active turtles.
 
 - **`/turtle_controller`**
-  - Subscribes to `/turtle1/pose`
-  - Subscribes to `/alive_turtles`
-  - Publishes velocity commands to `/turtle1/cmd_vel`
+     Subscribes to turtle pose and active turtle list, and publishes velocity commands to move `turtle1.`
 
 ---
 
@@ -60,6 +59,14 @@ float32 theta
 Turtle[] turtles
 ```
 
+**`CatchTurtle.srv`**
+
+```text
+string name
+---
+bool success
+```
+
 ---
 
 ## 📂 Repository Structure
@@ -67,19 +74,24 @@ Turtle[] turtles
 ros2-turtlesim-catch-them-all/
 ├── README.md
 ├── screenshots/
+│   ├── launch_and_simulation.png
+│   ├── node_list.png
+│   ├── topic_list.png
+│   ├── alive_turtles_info.png
+│   └── rqt_graph.png
 ├── videos/
+│   └── turtlesim_demo.gif
 ├── src/
 │   ├── my_robot_bringup/
 │   │   ├── launch/
 │   │   │   └── turtlesim_catch_them_all.launch.xml
 │   │   ├── config/
 │   │   │   └── catch_them_all_config.yaml
-│   │   ├── CMakeLists.txt
 │   │   └── package.xml
 │   ├── my_robot_interfaces/
 │   │   ├── msg/
 │   │   │   ├── Turtle.msg
-│   │   │   └── TurtleArray.msg
+│   │   │   ├── TurtleArray.msg
 │   │   ├── srv/
 │   │   │   └── CatchTurtle.srv
 │   │   └── package.xml
@@ -87,8 +99,8 @@ ros2-turtlesim-catch-them-all/
 │       ├── turtlesim_catch_them_all/
 │       │   ├── turtle_controller.py
 │       │   └── turtle_spawner.py
-│       ├── setup.py
 │       └── package.xml
+
 ```
 
 ---
@@ -96,6 +108,7 @@ ros2-turtlesim-catch-them-all/
 ## 🛠 Prerequisites
 - Ubuntu 24.04 LTS
 - ROS2 Jazzy
+- Python 3.12
 
 ---
 
@@ -183,7 +196,7 @@ A short demo video showing:
 ---
 
 ## 🧠 ROS2 Concepts Demonstrated
-- Nodes & packages
+- ROS2 Nodes & packages
 - Publishers & subscribers
 - Services
 - Timers
