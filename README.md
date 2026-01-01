@@ -96,6 +96,7 @@ ros2-turtlesim-catch-them-all/
 
 ## ⚙️ Build Instructions
 ```bash
+
 # Update dependencies
 rosdep update
 rosdep install --from-paths src --ignore-src -y
@@ -105,6 +106,7 @@ colcon build --symlink-install
 
 # Source environment
 source install/setup.bash
+
 ```
 
 ---
@@ -170,7 +172,7 @@ A short demo video showing:
 - Timers
 - Custom interfaces
 - Launch files
-- Runtime introspection (`ros2 nodes`, `ros2 topics`, `rqt_graph`)
+- Runtime introspection (`ros2 node`, `ros2 topic`, `rqt_graph`)
 
 ---
 
