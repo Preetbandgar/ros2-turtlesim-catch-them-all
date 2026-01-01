@@ -42,7 +42,9 @@ This project demonstrates a **multi-node ROS2 application** built on top of the 
 - `/kill`
 
 ### Custom Interfaces
+
 **`Turtle.msg`**
+
 ```text
 string name
 float32 x
@@ -51,6 +53,7 @@ float32 theta
 ```
 
 **`TurtleArray.msg`**
+
 ```text
 Turtle[] turtles
 ```
@@ -95,22 +98,27 @@ ros2-turtlesim-catch-them-all/
 ---
 
 ## ⚙️ Build Instructions
-```bash
 
 # Update dependencies
+```bash
   rosdep update
   rosdep install --from-paths src --ignore-src -y
+```
 
 # Build workspace
+```bash
   colcon build --symlink-install
+```
 
 # Source environment
+```bash
   source install/setup.bash
 ```
 
 ---
 
 ## ▶️ Run the Project
+
 ```bash
 ros2 launch my_robot_bringup turtlesim_catch_them_all.launch.xml
 ```
@@ -120,27 +128,35 @@ ros2 launch my_robot_bringup turtlesim_catch_them_all.launch.xml
 ## 🔍 Runtime Introspection
 
 ### Node List
+
 ```bash
 ros2 node list
 ```
+
 ![Node List](./screenshots/node_list.png)
 
 ### Topic List
+
 ```bash
 ros2 topic list
 ```
+
 ![Topic List](./screenshots/topic_list.png)
 
 ### Topic Info
+
 ```bash
 ros2 topic info /alive_turtles
 ```
+
 ![Alive Turtles Topic Info](./screenshots/alive_turtles_echo.png)
 
 ### Node & Topic Graph
+
 ```bash
 rqt_graph
 ```
+
 ![RQT Graph](./screenshots/rqt_graph.png)
 
 ---
