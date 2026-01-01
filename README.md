@@ -99,18 +99,18 @@ ros2-turtlesim-catch-them-all/
 
 ## ⚙️ Build Instructions
 
-# Update dependencies
+### Update dependencies
 ```bash
   rosdep update
   rosdep install --from-paths src --ignore-src -y
 ```
 
-# Build workspace
+### Build workspace
 ```bash
   colcon build --symlink-install
 ```
 
-# Source environment
+### Source environment
 ```bash
   source install/setup.bash
 ```
