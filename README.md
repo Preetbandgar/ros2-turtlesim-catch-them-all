@@ -157,7 +157,7 @@ rqt_graph
 
 ## Demo Video
 🎥 **Demo Video**  
-[Watch the demo video](./videos/turtlesim_demo.mp4)
+[Watch the demo video](./videos/turtlesim_demo.gif)
 
 ---
 
