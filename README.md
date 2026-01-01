@@ -1,6 +1,8 @@
 # 🐢 ROS2 Turtlesim – Catch Them All
 
 ![ROS2](https://img.shields.io/badge/ROS2-Jazzy-blue)
+![Python](https://img.shields.io/badge/Python-3.12-green)
+![Ubuntu](https://img.shields.io/badge/Ubuntu-24.04-orange)
 
 ---
 
