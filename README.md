@@ -136,7 +136,7 @@ ros2 topic list
 ```bash
 ros2 topic info /alive_turtles
 ```
-![Alive Turtles Topic Info](./screenshots/alive_turtles_info.png)
+![Alive Turtles Topic Info](./screenshots/alive_turtles_echo.png)
 
 ### Node & Topic Graph
 ```bash
