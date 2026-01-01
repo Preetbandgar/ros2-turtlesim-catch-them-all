@@ -1,151 +1,140 @@
 # 🐢 ROS2 Turtlesim – Catch Them All
 
-## Overview
-This project demonstrates a **multi-node ROS2 system** built using the Turtlesim simulator, where a master turtle autonomously tracks and catches dynamically spawned turtles.
-
-The primary objective is to practice **ROS2 fundamentals**:
-- ROS2 workspace and package structure
-- Node execution and lifecycle
-- Publishers, subscribers, services
-- Timers and callbacks
-- Custom message interfaces
-- Runtime introspection using ROS2 CLI tools
-
-This project focuses on **ROS2 software architecture and execution flow**, not advanced navigation, perception, or control algorithms.
+![ROS2](https://img.shields.io/badge/ROS2-Jazzy-blue)
 
 ---
 
-## Transparency & Attribution
-⚠️ **Transparency note**
+## 📌 Overview
+This project demonstrates a **multi-node ROS2 application** built on top of the Turtlesim simulator. A main turtle autonomously chases and catches dynamically spawned turtles using ROS2 publishers, subscribers, services, timers, and custom interfaces.
 
-This project was implemented by following and reproducing a guided, instructor-led implementation from the Udemy course **“ROS2 for Beginners” by Edouard Bernard**.
-
-The purpose of this work was hands-on learning through replication, inspection, and minor modification in order to understand ROS2 concepts correctly and ethically.
+> ⚠️ **Transparency Note**: This project was built as a hands-on learning exercise by following a structured ROS2 course. While the system was successfully built, launched, and introspected, the primary goal was understanding ROS2 architecture and tooling rather than inventing new algorithms.
 
 ---
 
-## System Architecture
+## 🧠 System Architecture
 
 ### Nodes
-
-- **turtlesim_node** (ROS2 provided)
-  - Runs the Turtlesim simulator
+- **`/turtlesim`** (ROS2 provided)
+  - Simulation environment
   - Provides `/spawn` and `/kill` services
-  - Publishes turtle pose information
+  - Publishes turtle pose and sensor topics
 
-- **turtle_spawner**
-  - Spawns new turtles periodically using the `/spawn` service
-  - Maintains a list of currently alive turtles
-  - Publishes turtle information on `/alive_turtles` using a custom message
+- **`/turtle_spawner`**
+  - Periodically spawns new turtles
+  - Publishes the list of active turtles on `/alive_turtles`
 
-- **turtle_controller**
+- **`/turtle_controller`**
   - Subscribes to `/turtle1/pose`
   - Subscribes to `/alive_turtles`
-  - Runs a timer-based loop
   - Publishes velocity commands to `/turtle1/cmd_vel`
 
 ---
 
-## Control Behavior (High-Level)
-A small amount of control logic is included **only to demonstrate closed-loop behavior**.  
-The controller computes linear and angular velocity commands based on the relative position of the target turtle so the system exhibits observable autonomous motion.
+## 🔄 Communication
 
-This logic is intentionally simple and **not intended to represent production-grade control**.
+### Topics
+- `/turtle1/pose`
+- `/turtle1/cmd_vel`
+- `/alive_turtles`
+
+### Services
+- `/spawn`
+- `/kill`
+
+### Custom Interfaces
+**`Turtle.msg`**
+```text
+string name
+float32 x
+float32 y
+float32 theta
+```
+
+**`TurtleArray.msg`**
+```text
+Turtle[] turtles
+```
 
 ---
 
-## Repository Structure
-```
+## 📂 Repository Structure
+```text
 ros2-turtlesim-catch-them-all/
 ├── README.md
-├── screenshots/                     # Screenshots used in this README
-├── videos/                          # Short demo recordings
-└── src/
-    ├── my_robot_bringup/             # Launch and configuration package
-    │   ├── launch/
-    │   │   └── turtlesim_catch_them_all.launch.xml
-    │   ├── config/
-    │   │   └── catch_them_all_config.yaml
-    │   ├── CMakeLists.txt
-    │   └── package.xml
-    │
-    ├── my_robot_interfaces/          # Custom interfaces package
-    │   ├── msg/
-    │   │   ├── Turtle.msg
-    │   │   ├── TurtleArray.msg
-    │   │   └── HardwareStatus.msg
-    │   ├── srv/
-    │   │   └── CatchTurtle.srv
-    │   ├── CMakeLists.txt
-    │   └── package.xml
-    │
-    └── turtlesim_catch_them_all/     # Application logic package
-        ├── package.xml
-        ├── setup.py
-        ├── setup.cfg
-        ├── resource/
-        └── turtlesim_catch_them_all/
-            ├── __init__.py
-            ├── turtle_controller.py
-            └── turtle_spawner.py
+├── screenshots/
+├── videos/
+├── src/
+│   ├── my_robot_bringup/
+│   │   ├── launch/
+│   │   │   └── turtlesim_catch_them_all.launch.xml
+│   │   ├── config/
+│   │   │   └── catch_them_all_config.yaml
+│   │   ├── CMakeLists.txt
+│   │   └── package.xml
+│   ├── my_robot_interfaces/
+│   │   ├── msg/
+│   │   │   ├── Turtle.msg
+│   │   │   └── TurtleArray.msg
+│   │   ├── srv/
+│   │   │   └── CatchTurtle.srv
+│   │   └── package.xml
+│   └── turtlesim_catch_them_all/
+│       ├── turtlesim_catch_them_all/
+│       │   ├── turtle_controller.py
+│       │   └── turtle_spawner.py
+│       ├── setup.py
+│       └── package.xml
 ```
-
 
 ---
 
-## Build & Run
+## 🛠 Prerequisites
+- Ubuntu 24.04 LTS
+- ROS2 Jazzy
 
-### Environment
-- **OS:** Ubuntu 24.04.3 LTS  
-- **ROS2:** Jazzy Jalisco  
-- **Language:** Python 3.12
+---
 
-### Build
+## ⚙️ Build Instructions
 ```bash
-colcon build
+# Update dependencies
+rosdep update
+rosdep install --from-paths src --ignore-src -y
+
+# Build workspace
+colcon build --symlink-install
+
+# Source environment
 source install/setup.bash
 ```
 
-### Run
+---
+
+## ▶️ Run the Project
 ```bash
-ros2 launch turtlesim_catch_them_all turtlesim.launch.py
+ros2 launch my_robot_bringup turtlesim_catch_them_all.launch.xml
 ```
 
 ---
 
-## Execution Evidence
+## 🔍 Runtime Introspection
 
-### Launch Execution & Simulation
-```bash
-ros2 launch turtlesim_catch_them_all turtlesim.launch.py
-```
-![Launch Execution and Simulation](./screenshots/launch_execution.png)
-
----
-
-### ROS2 Node List
+### Node List
 ```bash
 ros2 node list
 ```
-![ROS2 Node List](./screenshots/node_list.png)
+![Node List](./screenshots/node_list.png)
 
----
-
-### ROS2 Topic List
+### Topic List
 ```bash
 ros2 topic list
 ```
-![ROS2 Topic List](./screenshots/topic_list.png)
+![Topic List](./screenshots/topic_list.png)
 
----
-
-### Custom Message Output
+### Topic Info
 ```bash
-ros2 topic echo /alive_turtles
+ros2 topic info /alive_turtles
 ```
-![Alive Turtles Topic Echo](./screenshots/alive_turtles_echo.png)
-
----
+![Alive Turtles Topic Info](./screenshots/alive_turtles_info.png)
 
 ### Node & Topic Graph
 ```bash
@@ -155,40 +144,50 @@ rqt_graph
 
 ---
 
-## Demo Video
+## 🎥 Demo
+A short demo video showing:
+- Launch execution
+- Turtle spawning
+- Autonomous chasing behavior
+- ROS2 introspection
 
-![Watch the demo video](./videos/turtlesim_demo.gif)
+📽 **Demo Video**:
 
+![Demo Video](./videos/turtlesim_demo.gif)
+---
+
+## 🧪 Expected Behavior
+- New turtles spawn periodically
+- Main turtle (`turtle1`) chases active turtles
+- System continues autonomously
 
 ---
 
-## ROS2 Concepts Demonstrated
-- ROS2 workspace and package structure
-- Python-based ROS2 nodes
-- Publishers, subscribers, and services
-- Timers and callbacks
-- Custom message interfaces
-- Multi-node coordination
-- Runtime introspection with ROS2 CLI tools
-- Graph visualization using `rqt_graph`
+## 🧠 ROS2 Concepts Demonstrated
+- Nodes & packages
+- Publishers & subscribers
+- Services
+- Timers
+- Custom interfaces
+- Launch files
+- Runtime introspection (`ros2 nodes`, `ros2 topics`, `rqt_graph`)
 
 ---
 
-## Notes
-- Simulation is used to avoid hardware dependency
-- Build artifacts and IDE cache files are excluded from version control
-- This project serves as a **foundational ROS2 learning project**
+## 🚀 Possible Improvements
+- Smarter target selection
+- Multi-hunter turtles
+- Event-based architecture
+- Dockerized deployment
 
 ---
 
-## Credits
-- **Course & Instructor:** Edouard Bernard — *ROS2 for Beginners* (Udemy)
-
-LinkedIn: https://www.linkedin.com/in/edouard-renard-66449aa5/
-
-Course link: https://www.udemy.com/course/ros2-for-beginners/
+## 📜 Credits
+Built by following the **ROS2 for Beginners** course by **Edouard Renard (Udemy)** as a learning exercise.
 
 ---
 
-## Author
+## 👤 Author
+
 GitHub: https://github.com/Preetbandgar
+
