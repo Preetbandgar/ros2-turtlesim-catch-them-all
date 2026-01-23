@@ -11,10 +11,6 @@ This project demonstrates a **multi-node ROS2 application** built using the **Tu
 A primary turtle (`turtle1`) autonomously chases dynamically spawned turtles using **ROS2 nodes, topics, services, timers, and custom interfaces.**
 The project focuses on **ROS2 fundamentals and runtime introspection,** not advanced robotics algorithms.
 
-> ⚠️ **Transparency Note**:
-  This project was completed by following a structured ROS2 course and reproducing the implementation step-by-step.
-  The objective was to **understand ROS2 architecture, execution flow, and debugging tools**  through hands-on practice.
-
 ---
 
 ## 🧠 System Architecture
@@ -215,7 +211,7 @@ A short demo video showing:
 ---
 
 ## 📜 Credits
-Built by following the **ROS2 for Beginners** course by **Edouard Renard (Udemy)** as a learning exercise.
+Based on the **ROS2 for Beginners** curriculum by **Edouard Renard (Udemy)**, adapted and documented here as a reproducible hands-on ROS2 systems exercise.
 
 ---
 
