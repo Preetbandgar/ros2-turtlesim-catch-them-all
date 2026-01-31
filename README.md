@@ -1,4 +1,4 @@
-# 🐢 ROS2 Turtlesim – Catch Them All
+# 🐢 ROS2 Multi-Node Control and Coordination
 
 ![ROS2](https://img.shields.io/badge/ROS2-Jazzy-blue)
 ![Python](https://img.shields.io/badge/Python-3.12-green)
